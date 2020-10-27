@@ -1,0 +1,25 @@
+{
+  "name": "whisky-cms-ng-srv",
+  "version": "1.0.0",
+  "description": "Premier projet Fullstack CMS based on the MEAN stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johndeuf89/whisky-cms-ng-srv.git"
+  },
+  "keywords": [
+    "Mongo",
+    "Express",
+    "Angular",
+    "Node"
+  ],
+  "author": "jopip",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johndeuf89/whisky-cms-ng-srv/issues"
+  },
+  "homepage": "https://github.com/johndeuf89/whisky-cms-ng-srv#readme"
+}
