@@ -4,7 +4,8 @@
   "description": "Premier projet Fullstack CMS based on the MEAN stack",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "npm run lint & nodemon app.js",
+    "lint": "./node_modules/.bin/eslint *.js"
   },
   "repository": {
     "type": "git",
@@ -23,16 +24,16 @@
   },
   "homepage": "https://github.com/johndeuf89/whisky-cms-ng-srv#readme",
   "devDependencies": {
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "prettier": "2.1.2"
+    "eslint": "^7.2.0"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.11"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   }
 }
