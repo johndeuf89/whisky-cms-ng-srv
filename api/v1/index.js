@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router(); // Création d"un router
-
 const Blogpost = require('../models/blogpost');
 
 
@@ -17,14 +16,14 @@ router.get('/blog-posts', (req, res) => {
 		.exec()
 		.then(blogposts => res.status(200).json(blogposts))
 		.catch(err => res.status(500).json({
-			message:'blog post not found :\'(',
+			message: 'blog post not found :\'(',
 			error: err
 		}));
-	
-	
+
+
 	//res.status(200).json(posts);
 
-} );
+});
 
 //Create document
 router.post('/blog-posts', (req, res) => {
@@ -43,19 +42,42 @@ router.get('/blog-posts/:id', (req, res) => {
 	const id = req.params.id;
 	Blogpost.findById(id)
 		.then(blogPost => res.status(200).json(blogPost))
-		.catch(err => res.status(500).json({ message:`Blogpost with id : ${id} not found`,err:err }));
+		.catch(err => res.status(500).json({ message: `Blogpost with id : ${id} not found`, err: err }));
 });
 
 //DELETE document by id on blogposts
-router.delete('/blog-posts/:id', (req,res) => {
+router.delete('/blog-posts/:id', (req, res) => {
 	const id = req.params.id;
-	Blogpost.findByIdAndDelete(id, (err, blogPost) =>{
-		if(err){
+	Blogpost.findByIdAndDelete(id, (err, blogPost) => {
+		if (err) {
 			return err.status(404).json(err);
 		}
 		res.status(202).json({ msg: `blog post with id ${blogPost._id} has been deleted ` });
 	});
+
 });
+
+router.delete('/blog-posts', (req, res) => {
+	const ids = req.query.ids;
+	const allIds = ids.split(',').map(id => {
+		if (id.match(/^[0-9a-fA-F]{24}$/)) {
+			return mongoose.Types.ObjectId((id));
+		} else {
+			console.log('id non valide', id);
+		}
+	});
+	const condition = { _id: { $in: allIds } };
+	Blogpost.deleteMany(condition, (err, results) => {
+		if (err) {
+			return res.status(500).json(err);
+		}
+		res.status(202).json(results);
+
+	}); // {nb :2, ok :true}
+
+});
+
+
 
 
 
